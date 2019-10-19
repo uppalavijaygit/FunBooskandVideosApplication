@@ -22,10 +22,7 @@ public class BooksAndVideosUtils {
 	
 	public static boolean verifyPhysicalProduct(PurchaseOrderDetails orderDetails) throws Exception {
 		Optional<Product> employeeOptional = Optional.ofNullable(orderDetails.getProduct());
-		if(employeeOptional.isPresent())
-			return Boolean.TRUE;
-		else
-			return Boolean.FALSE;
+		return employeeOptional.isPresent() ? Boolean.TRUE : Boolean.FALSE;
 	}
 
 	public static ShippingSlip prepareShippingSlip(UserAddressEntity userAddressEntity) throws Exception {
