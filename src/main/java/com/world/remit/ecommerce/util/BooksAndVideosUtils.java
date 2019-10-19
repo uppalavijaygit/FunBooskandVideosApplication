@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.world.remit.ecommerce.dao.FunBooksAndVideosDao;
 import com.world.remit.ecommerce.entity.ShippingSlipEntity;
 import com.world.remit.ecommerce.entity.UserAddressEntity;
+import com.world.remit.ecommerce.exceptions.ProductNotException;
 import com.world.remit.ecommerce.model.Product;
 import com.world.remit.ecommerce.model.PurchaseOrderDetails;
 import com.world.remit.ecommerce.model.PurchaseOrderRequest;
@@ -20,9 +21,11 @@ public class BooksAndVideosUtils {
 	
 	
 	public static boolean verifyPhysicalProduct(PurchaseOrderDetails orderDetails) throws Exception {
-		Optional<Product> productOptional = Optional.of(orderDetails.getProduct());
-		productOptional.orElseThrow(()-> new Exception("No Product Found"));
-		return productOptional.isPresent();
+		Optional<Product> employeeOptional = Optional.ofNullable(orderDetails.getProduct());
+		if(employeeOptional.isPresent())
+			return Boolean.TRUE;
+		else
+			return Boolean.FALSE;
 	}
 
 	public static ShippingSlip prepareShippingSlip(UserAddressEntity userAddressEntity) throws Exception {

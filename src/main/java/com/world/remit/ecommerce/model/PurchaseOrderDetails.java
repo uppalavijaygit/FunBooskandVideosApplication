@@ -4,24 +4,25 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.beans.factory.annotation.Required;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(description = "Fun Books & Videos PurchaseOrderRequest Information")
-public class PurchaseOrderDetails extends PurchaseOrderRequest {
+@ApiModel(description = "Fun Books & Videos PurchaseOrderDetails Information")
+public class PurchaseOrderDetails{
 
-	@NotNull
+	@NotNull(message = "Requested Type should not be null. Shoud Either PRODUCT OR MEMBERSHIP")
 	@ApiModelProperty(notes = "Shoud Either PRODUCT OR MEMBERSHIP",example = "MEMBERSHIP")
 	private RequestType requestType;
 	
 	@NotNull
-	@ApiModelProperty(notes = "Shoud Either Book OR Video",example = "Book")
-	private Product  product;
+	private Product product;
 	
 	@NotNull
-	@ApiModelProperty(notes = "Shoud Either BookClub OR VideoClub",example = "BookClub")
+	@ApiModelProperty(notes = "Shoud Either BookClub OR VideoClub",example = "BOOK_CLUB or VIDEO_CLUB or PREMIUM")
 	private Membership_Type mebershipType;
 	
 	@NotNull

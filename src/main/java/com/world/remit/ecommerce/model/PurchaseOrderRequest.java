@@ -1,5 +1,7 @@
 package com.world.remit.ecommerce.model;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -17,11 +19,15 @@ public class PurchaseOrderRequest {
 	private String purchaseOrderId;
 	
 	@NotNull
-	@ApiModelProperty(notes = "Shoud be minimum of 3 and Max 5",example = "101 or 102 or 103 ")
+	@ApiModelProperty(notes = "Shoud be minimum of 3 and Max 5",example = "101")
+	@Min(101)
+	@Digits(integer=10, fraction=0)
 	private long customerId;
 	
 	@NotNull
 	@ApiModelProperty(notes = "Shoud not empty" ,example = "50.00 ")
+	@Digits(integer=6, fraction=2)
+	@Min(value = 0L, message = "The value must be positive")
 	private double totalAmount;
 	
 	@NotNull
@@ -29,7 +35,6 @@ public class PurchaseOrderRequest {
 	private RequestType requestType;
 	
 	@NotNull
-	@ApiModelProperty(notes = "Shoud not be empty")
 	private PurchaseOrderDetails orderDetails;
 	
 
