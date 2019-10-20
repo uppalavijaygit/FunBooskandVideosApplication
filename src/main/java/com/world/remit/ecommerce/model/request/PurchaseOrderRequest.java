@@ -1,10 +1,13 @@
-package com.world.remit.ecommerce.model;
+package com.world.remit.ecommerce.model.request;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.world.remit.ecommerce.model.PurchaseOrderDetails;
+import com.world.remit.ecommerce.types.RequestType;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -37,7 +40,26 @@ public class PurchaseOrderRequest {
 	@NotNull
 	private PurchaseOrderDetails orderDetails;
 	
+	
+	
 
+	public PurchaseOrderRequest() {
+	}
+
+
+	public PurchaseOrderRequest(
+			String purchaseOrderId,
+			long customerId,
+			double totalAmount,
+			PurchaseOrderDetails orderDetails,RequestType requestType) {
+		this.purchaseOrderId = purchaseOrderId;
+		this.customerId = customerId;
+		this.totalAmount = totalAmount;
+		this.requestType = requestType;
+		this.orderDetails = orderDetails;
+	}
+	
+	
 	public RequestType getRequestType() {
 		return requestType;
 	}

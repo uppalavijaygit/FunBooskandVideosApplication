@@ -1,6 +1,8 @@
-package com.world.remit.ecommerce.model;
+package com.world.remit.ecommerce.mode.response;
 
 import java.util.Date;
+
+import com.world.remit.ecommerce.model.ShippingSlip;
 
 public class PurchaseOrderResponse {
 	
@@ -8,29 +10,36 @@ public class PurchaseOrderResponse {
 	private long customerId;
 	private double totalAmount;
 	private String requestType;
-	private Product  product;
 	private String mebershipType;
 	private Date membershipStartDate;
 	private Date membershipExpiryDate;
 	private ShippingSlip shippingSlip;
-	
+	private boolean isActive;
 	
 	public PurchaseOrderResponse() {
 	}
 
-
 	public PurchaseOrderResponse(String purchaseOrderId, long customerId, double totalAmount, String requestType,
-			Product product, String mebershipType, Date membershipStartDate, Date membershipExpiryDate,
-			ShippingSlip shippingSlip) {
+			String mebershipType, Date membershipStartDate, Date membershipExpiryDate, ShippingSlip shippingSlip,
+			boolean isActive) {
 		this.purchaseOrderId = purchaseOrderId;
 		this.customerId = customerId;
 		this.totalAmount = totalAmount;
 		this.requestType = requestType;
-		this.product = product;
 		this.mebershipType = mebershipType;
 		this.membershipStartDate = membershipStartDate;
 		this.membershipExpiryDate = membershipExpiryDate;
 		this.shippingSlip = shippingSlip;
+		this.isActive = isActive;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 
@@ -88,18 +97,6 @@ public class PurchaseOrderResponse {
 
 	public void setRequestType(String requestType) {
 		this.requestType = requestType;
-	}
-
-
-
-	public Product getProduct() {
-		return product;
-	}
-
-
-
-	public void setProduct(Product product) {
-		this.product = product;
 	}
 
 

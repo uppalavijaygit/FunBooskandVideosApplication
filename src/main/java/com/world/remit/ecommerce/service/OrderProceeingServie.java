@@ -2,8 +2,8 @@ package com.world.remit.ecommerce.service;
 
 import org.springframework.stereotype.Service;
 
-import com.world.remit.ecommerce.model.PurchaseOrderRequest;
-import com.world.remit.ecommerce.model.PurchaseOrderResponse;
+import com.world.remit.ecommerce.mode.response.PurchaseOrderResponse;
+import com.world.remit.ecommerce.model.request.PurchaseOrderRequest;
 
 @Service
 public interface OrderProceeingServie {

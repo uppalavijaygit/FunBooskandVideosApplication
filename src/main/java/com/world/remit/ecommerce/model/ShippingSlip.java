@@ -1,10 +1,14 @@
 package com.world.remit.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ShippingSlip {
 	
 	private long customerId;
 	private String productId;
+	@JsonIgnore
 	private String productType;
+	@JsonIgnore
 	private String productName;
 	private String deliveryDate;
 	private String deliveryAddressType;

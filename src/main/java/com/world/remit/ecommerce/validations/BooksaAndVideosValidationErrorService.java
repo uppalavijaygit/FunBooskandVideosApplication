@@ -1,4 +1,4 @@
-package com.world.remit.ecommerce.service;
+package com.world.remit.ecommerce.validations;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

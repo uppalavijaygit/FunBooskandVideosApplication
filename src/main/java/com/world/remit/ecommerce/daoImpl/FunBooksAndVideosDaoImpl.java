@@ -24,16 +24,16 @@ public class FunBooksAndVideosDaoImpl implements FunBooksAndVideosDao {
 	UserAddressRepository addressRepository;
 
 	@Override
-	public UserMembershipEnity updateMemberShipDetails(UserMembershipEnity entity) throws Exception {
+	public UserMembershipEnity updateMemberShipDetails(UserMembershipEnity entity) throws InvalidCustomerException {
 		Optional<UserMembershipEnity> userMembershipEnityOptional = Optional.of(repository.save(entity));
 		userMembershipEnityOptional.orElseThrow(()-> new InvalidCustomerException("Customer Not Found!!!"));
 		return userMembershipEnityOptional.get();
 	}
 
 	@Override
-	public UserAddressEntity getCustomerAddress(long cutomerId) throws Exception {
+	public UserAddressEntity getCustomerAddress(long cutomerId) throws InvalidCustomerException {
 		Optional<UserAddressEntity> userAddressEntity = addressRepository.findById(cutomerId);
-		userAddressEntity.orElseThrow(()->new Exception("Address Not found"));
+		userAddressEntity.orElseThrow(()->new InvalidCustomerException("Address Not found"));
 		return userAddressEntity.get();
 	}
 

@@ -13,8 +13,8 @@ import com.world.remit.ecommerce.entity.UserAddressEntity;
 import com.world.remit.ecommerce.exceptions.ProductNotException;
 import com.world.remit.ecommerce.model.Product;
 import com.world.remit.ecommerce.model.PurchaseOrderDetails;
-import com.world.remit.ecommerce.model.PurchaseOrderRequest;
 import com.world.remit.ecommerce.model.ShippingSlip;
+import com.world.remit.ecommerce.model.request.PurchaseOrderRequest;
 
 public class BooksAndVideosUtils {
 	
@@ -27,9 +27,9 @@ public class BooksAndVideosUtils {
 
 	public static ShippingSlip prepareShippingSlip(UserAddressEntity userAddressEntity) throws Exception {
 		String deliveryDate = generateDeliveryDate(userAddressEntity.getPinCode());
-		StringBuffer fullAddress = new StringBuffer(userAddressEntity.getHno()).append(userAddressEntity.getStreetName())
-				.append(userAddressEntity.getArea()).append(userAddressEntity.getCounty()).append(userAddressEntity.getPinCode());
-		return new ShippingSlip(userAddressEntity.getCustomerId(), null, userAddressEntity.getAddressType(), null, deliveryDate, userAddressEntity.getAddressType(), fullAddress.toString());
+		StringBuffer fullAddress = new StringBuffer(userAddressEntity.getHno()).append(", ").append(userAddressEntity.getStreetName()).append(", ")
+				.append(userAddressEntity.getArea()).append(", ").append(userAddressEntity.getCounty()).append(", ").append(userAddressEntity.getPinCode());
+		return new ShippingSlip(userAddressEntity.getCustomerId(), null, null, null, deliveryDate, userAddressEntity.getAddressType(), fullAddress.toString());
 		
 	}
 	

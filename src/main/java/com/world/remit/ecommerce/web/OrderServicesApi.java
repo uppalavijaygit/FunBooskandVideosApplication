@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.world.remit.ecommerce.model.PurchaseOrderRequest;
-import com.world.remit.ecommerce.model.PurchaseOrderResponse;
-import com.world.remit.ecommerce.service.BooksaAndVideosValidationErrorService;
+import com.world.remit.ecommerce.mode.response.PurchaseOrderResponse;
+import com.world.remit.ecommerce.model.request.PurchaseOrderRequest;
 import com.world.remit.ecommerce.service.OrderProceeingServie;
+import com.world.remit.ecommerce.validations.BooksaAndVideosValidationErrorService;
 
 
 /**

@@ -24,6 +24,15 @@ public class Product {
 	public Product() {
 	}
 	
+	
+	
+	public Product(int id,String productSKU) {
+		this.id = id;
+		this.productSKU = productSKU;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

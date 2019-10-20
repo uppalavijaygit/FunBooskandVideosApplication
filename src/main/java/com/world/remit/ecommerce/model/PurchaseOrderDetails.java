@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.world.remit.ecommerce.types.Membership_Type;
+import com.world.remit.ecommerce.types.RequestType;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,9 +16,9 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Fun Books & Videos PurchaseOrderDetails Information")
 public class PurchaseOrderDetails{
 
-	@NotNull(message = "Requested Type should not be null. Shoud Either PRODUCT OR MEMBERSHIP")
-	@ApiModelProperty(notes = "Shoud Either PRODUCT OR MEMBERSHIP",example = "MEMBERSHIP")
-	private RequestType requestType;
+//	@NotNull(message = "Requested Type should not be null. Shoud Either PRODUCT OR MEMBERSHIP")
+//	@ApiModelProperty(notes = "Shoud Either PRODUCT OR MEMBERSHIP",example = "MEMBERSHIP")
+//	private RequestType requestType;
 	
 	@NotNull
 	private Product product;
@@ -34,12 +36,27 @@ public class PurchaseOrderDetails{
 	private Date membershipExpiryDate;
 	
 	
-	public RequestType getRequestType() {
-		return requestType;
+	
+	
+	public PurchaseOrderDetails() {
 	}
-	public void setRequestType(RequestType requestType) {
-		this.requestType = requestType;
+	
+	
+	public PurchaseOrderDetails(
+			Product product, Membership_Type mebershipType, Date membershipStartDate,
+		    Date membershipExpiryDate) {
+		//this.requestType = requestType;
+		this.product = product;
+		this.mebershipType = mebershipType;
+		this.membershipStartDate = membershipStartDate;
+		this.membershipExpiryDate = membershipExpiryDate;
 	}
+//	public RequestType getRequestType() {
+//		return requestType;
+//	}
+//	public void setRequestType(RequestType requestType) {
+//		this.requestType = requestType;
+//	}
 	public Product getProduct() {
 		return product;
 	}
