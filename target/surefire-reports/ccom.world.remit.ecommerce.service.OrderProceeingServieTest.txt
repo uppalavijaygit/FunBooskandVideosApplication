@@ -1,7 +1,0 @@
--------------------------------------------------------------------------------
-Test set: ccom.world.remit.ecommerce.service.OrderProceeingServieTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.242 s <<< FAILURE! - in ccom.world.remit.ecommerce.service.OrderProceeingServieTest
-initializationError(ccom.world.remit.ecommerce.service.OrderProceeingServieTest)  Time elapsed: 0.009 s  <<< ERROR!
-java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test
-
