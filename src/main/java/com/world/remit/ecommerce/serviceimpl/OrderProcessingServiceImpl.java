@@ -3,6 +3,7 @@ package com.world.remit.ecommerce.serviceimpl;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +18,7 @@ import com.world.remit.ecommerce.mode.response.PurchaseOrderResponse;
 import com.world.remit.ecommerce.model.PurchaseOrderDetails;
 import com.world.remit.ecommerce.model.ShippingSlip;
 import com.world.remit.ecommerce.model.request.PurchaseOrderRequest;
+import com.world.remit.ecommerce.repository.UserAddressRepository;
 import com.world.remit.ecommerce.repository.UserMemberShipRepository;
 import com.world.remit.ecommerce.service.OrderProceeingServie;
 import com.world.remit.ecommerce.types.Membership_Type;
@@ -33,6 +35,13 @@ public class OrderProcessingServiceImpl implements OrderProceeingServie {
 	
 	@Autowired
 	FunBooksAndVideosDao funBooksAndVideosDao;
+	
+	@Autowired
+	UserAddressRepository addressRepository;
+	
+
+	public OrderProcessingServiceImpl() {
+	}
 
 	@Override
 	public PurchaseOrderResponse processOrder(PurchaseOrderRequest request) throws Exception {
@@ -41,13 +50,16 @@ public class OrderProcessingServiceImpl implements OrderProceeingServie {
 		PurchaseOrderResponse response = null;
 		if(request.getRequestType().equals(RequestType.MEMBERSHIP)) {
 			entity = processUserMembershipEnity(request);
-			funBooksAndVideosDao.updateMemberShipDetails(entity);
+			//funBooksAndVideosDao.updateMemberShipDetails(entity);
+			repository.save(entity);
 			response = processResponse(request,entity);
 		}
 		if(BooksAndVideosUtils.verifyPhysicalProduct(request.getOrderDetails())) {
-			Optional<UserAddressEntity> userAddressEntity = Optional.of(funBooksAndVideosDao.getCustomerAddress(request.getCustomerId()));
+			// Optional<UserAddressEntity> userAddressEntity = Optional.of(funBooksAndVideosDao.getCustomerAddress(request.getCustomerId()));
+			BooksAndVideosUtils utils = new BooksAndVideosUtils();
+			Optional<UserAddressEntity> userAddressEntity = addressRepository.findById(request.getCustomerId());
 			userAddressEntity.orElseThrow(()-> new CustomerAddrNotFoundException("Address Not Found"));
-			Optional<ShippingSlip>  shippingSlip =  Optional.of(BooksAndVideosUtils.prepareShippingSlip(userAddressEntity.get()));
+			Optional<ShippingSlip>  shippingSlip =  Optional.of(utils.prepareShippingSlip(userAddressEntity.get()));
 			shippingSlip.orElseThrow(()->new InvalidCustomerException("Unable to get Shipping Details "));
 			ShippingSlip slip = shippingSlip.get();
 			slip.setProductId(request.getOrderDetails().getProduct().getProductSKU());
@@ -85,6 +97,10 @@ public class OrderProcessingServiceImpl implements OrderProceeingServie {
 		entity.setMemberShipExpiryDate(getMembershipExpiryDate());
 		return entity;
 	}
+	
+	
+	
+
 
 
 }

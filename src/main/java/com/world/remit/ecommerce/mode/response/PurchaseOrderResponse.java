@@ -13,7 +13,7 @@ public class PurchaseOrderResponse {
 	private String mebershipType;
 	private Date membershipStartDate;
 	private Date membershipExpiryDate;
-	private ShippingSlip shippingSlip;
+	ShippingSlip shippingSlip;
 	private boolean isActive;
 	
 	public PurchaseOrderResponse() {

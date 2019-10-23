@@ -1,10 +1,6 @@
 package com.world.remit.ecommerce.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter @Setter @ToString
 public class VideoModel extends Product {
 	private int id;
 	private String title;

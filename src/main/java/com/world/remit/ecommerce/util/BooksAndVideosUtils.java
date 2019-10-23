@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.world.remit.ecommerce.dao.FunBooksAndVideosDao;
 import com.world.remit.ecommerce.entity.ShippingSlipEntity;
@@ -16,6 +17,7 @@ import com.world.remit.ecommerce.model.PurchaseOrderDetails;
 import com.world.remit.ecommerce.model.ShippingSlip;
 import com.world.remit.ecommerce.model.request.PurchaseOrderRequest;
 
+
 public class BooksAndVideosUtils {
 	
 	
@@ -25,7 +27,10 @@ public class BooksAndVideosUtils {
 		return employeeOptional.isPresent() ? Boolean.TRUE : Boolean.FALSE;
 	}
 
-	public static ShippingSlip prepareShippingSlip(UserAddressEntity userAddressEntity) throws Exception {
+	public ShippingSlip prepareShippingSlip(UserAddressEntity userAddressEntity) throws Exception {
+		if(userAddressEntity==null) {
+			return new ShippingSlip();
+		}
 		String deliveryDate = generateDeliveryDate(userAddressEntity.getPinCode());
 		StringBuffer fullAddress = new StringBuffer(userAddressEntity.getHno()).append(", ").append(userAddressEntity.getStreetName()).append(", ")
 				.append(userAddressEntity.getArea()).append(", ").append(userAddressEntity.getCounty()).append(", ").append(userAddressEntity.getPinCode());
@@ -33,7 +38,7 @@ public class BooksAndVideosUtils {
 		
 	}
 	
-	private static String generateDeliveryDate(String pinCode){
+	private String generateDeliveryDate(String pinCode){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date()); // Now use today date.
 		c.add(Calendar.DATE, 15); // Adds 15 days
